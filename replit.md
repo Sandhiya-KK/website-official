@@ -129,8 +129,41 @@ This is a full-stack web application for Tarcin Robotic LLP, a deep-tech startup
 - Email service should use professional SMTP provider
 - Consider CDN for static asset delivery
 
+## Localhost Development Setup
+
+### Architecture Changes (June 28, 2025)
+The project has been restructured to support localhost development with separate frontend and backend folders:
+
+#### New Structure
+- `frontend/` - React application configured for localhost:3000
+- `backend/` - Express.js API server configured for localhost:5000
+- Original `client/` and `server/` folders preserved for Replit deployment
+
+#### Frontend Configuration (localhost:3000)
+- Vite development server with proxy configuration
+- API requests automatically route to http://localhost:5000
+- Independent package.json with frontend-specific dependencies
+- TypeScript configuration with path aliases
+
+#### Backend Configuration (localhost:5000)
+- Pure API server without frontend serving
+- CORS middleware configured for frontend communication
+- Independent package.json with backend-specific dependencies
+- JWT authentication and JSON file storage maintained
+
+#### Communication Flow
+- Frontend makes API calls to relative URLs (/api/...)
+- Requests automatically proxy to backend server
+- CORS headers allow cross-origin requests
+- Authentication tokens handled via localStorage
+
+### Development Workflow
+1. Start backend: `cd backend && npm run dev` (Port 5000)
+2. Start frontend: `cd frontend && npm run dev` (Port 3000)
+3. Access application at http://localhost:3000
+
 ## Changelog
-- June 28, 2025. Initial setup
+- June 28, 2025. Initial setup and localhost development restructure
 
 ## User Preferences
 
